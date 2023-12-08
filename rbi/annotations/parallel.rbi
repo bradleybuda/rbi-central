@@ -1,45 +1,27 @@
-# typed: strict
+# typed: true
 
 module Parallel
-  extend T::Sig
-
   class << self
-    Options = T.type_alias do
-      {
-        progress: T.nilable(String),
-        # TODO: want :start and :finish to be generic too; that might mean we can't have as part of shared options
-        start: T.nilable(T.proc.params(item: T.anything, index: Integer).void),
-        finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void),
-        in_processes: T.nilable(Integer),
-        in_ractors: T.nilable(Integer),
-        in_threads: T.nilable(Integer),
-        interrupt_signal: T.nilable(String),
-        isolation: T.nilable(T::Boolean),
-      }
-    end
-
     sig do
       params(
-        array: T::Enumerable[T.anything],
-        options: Options,
+        args: [T::Enumerable[T.anything], T.nilable({progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)})],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Boolean)
     end
-    def all?(array, options = {}, &block); end
+    def all?(*args, &block); end
 
     sig do
       params(
-        array: T::Enumerable[T.anything],
-        options: Options,
+        args: [T::Enumerable[T.anything], T.nilable({progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)})],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Boolean)
     end
-    def any?(array, options = {}, &block); end
+    def any?(*args, &block); end
 
     sig do
       params(
         array: T::Enumerable[T.anything],
-        options: Options,
+        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).void
     end
@@ -48,7 +30,7 @@ module Parallel
     sig do
       params(
         array: T::Enumerable[T.anything],
-        options: Options,
+        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
         block: T.proc.params(args: [T.anything, Integer]).returns(T.anything)
       ).void
     end
@@ -56,25 +38,23 @@ module Parallel
 
     sig do
       params(
-        array: T::Enumerable[T.anything],
-        options: Options,
+        args: [T::Enumerable[T.anything], T.nilable({progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)})],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
-    def filter_map(array, options = {}, &block); end
+    def filter_map(*args, &block); end
 
     sig do
       params(
-        array: T::Enumerable[T.anything],
-        options: Options,
+        args: [T::Enumerable[T.anything], T.nilable({progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)})],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
-    def flat_map(array, options = {}, &block); end
+    def flat_map(*args, &block); end
 
     sig do
       params(
-        options: Options,
+        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
@@ -82,7 +62,7 @@ module Parallel
 
     sig do
       params(
-        options: Options,
+        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
@@ -91,20 +71,20 @@ module Parallel
     sig do
       params(
         array: T::Enumerable[T.anything],
-        options: Options,
+        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
-    def map(source, options = T.unsafe(nil), &block); end
+    def map(array, options = {}, &block); end
 
     sig do
       params(
         array: T::Enumerable[T.anything],
-        options: Options,
+        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
         block: T.proc.params(args: [T.anything, Integer]).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
-    def map_with_index(array, options = T.unsafe(nil), &block); end
+    def map_with_index(array, options = {}, &block); end
 
     sig { returns(Integer) }
     def physical_processor_count; end
@@ -130,8 +110,6 @@ class Parallel::Break < ::StandardError
   def value; end
 end
 
-class Parallel::DeadWorker < ::StandardError; end
-
 class Parallel::ExceptionWrapper
   sig { params(exception: Exception).void }
   def initialize(exception); end
@@ -139,8 +117,6 @@ class Parallel::ExceptionWrapper
   sig { returns(Exception) }
   def exception; end
 end
-
-class Parallel::Kill < ::Parallel::Break; end
 
 Parallel::Stop = T.let(T.unsafe(nil), Object)
 
