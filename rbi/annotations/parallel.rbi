@@ -4,7 +4,7 @@ module Parallel
   class << self
     sig do
       params(
-        args: [T::Enumerable[T.anything], T.nilable({progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)})],
+        args: [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Boolean)
     end
@@ -12,7 +12,7 @@ module Parallel
 
     sig do
       params(
-        args: [T::Enumerable[T.anything], T.nilable({progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)})],
+        args: [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Boolean)
     end
@@ -21,7 +21,7 @@ module Parallel
     sig do
       params(
         array: T::Enumerable[T.anything],
-        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
+        options: T::Hash[Symbol, T.anything],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).void
     end
@@ -30,7 +30,7 @@ module Parallel
     sig do
       params(
         array: T::Enumerable[T.anything],
-        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
+        options: T::Hash[Symbol, T.anything],
         block: T.proc.params(args: [T.anything, Integer]).returns(T.anything)
       ).void
     end
@@ -38,7 +38,7 @@ module Parallel
 
     sig do
       params(
-        args: [T::Enumerable[T.anything], T.nilable({progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)})],
+        args: [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
@@ -46,7 +46,7 @@ module Parallel
 
     sig do
       params(
-        args: [T::Enumerable[T.anything], T.nilable({progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)})],
+        args: [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
@@ -54,7 +54,7 @@ module Parallel
 
     sig do
       params(
-        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
+        options: T::Hash[Symbol, T.anything],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
@@ -62,7 +62,7 @@ module Parallel
 
     sig do
       params(
-        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
+        options: T::Hash[Symbol, T.anything],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
@@ -71,7 +71,7 @@ module Parallel
     sig do
       params(
         array: T::Enumerable[T.anything],
-        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
+        options: T::Hash[Symbol, T.anything],
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
@@ -80,7 +80,7 @@ module Parallel
     sig do
       params(
         array: T::Enumerable[T.anything],
-        options: {progress: T.nilable(String), start: T.nilable(T.proc.params(item: T.anything, index: Integer).void), finish: T.nilable(T.proc.params(item: T.anything, index: Integer, result: T.anything).void), in_processes: T.nilable(Integer), in_ractors: T.nilable(Integer), in_threads: T.nilable(Integer), interrupt_signal: T.nilable(String), isolation: T.nilable(T::Boolean)},
+        options: T::Hash[Symbol, T.anything],
         block: T.proc.params(args: [T.anything, Integer]).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
