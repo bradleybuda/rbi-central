@@ -4,7 +4,10 @@ module Parallel
   class << self
     sig do
       params(
-        args: [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
+        args: T.any(
+          [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
+          T::Enumerable[T.anything]
+        ),
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Boolean)
     end
@@ -12,7 +15,10 @@ module Parallel
 
     sig do
       params(
-        args: [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
+        args: T.any(
+          [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
+          T::Enumerable[T.anything]
+        ),
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Boolean)
     end
@@ -38,7 +44,10 @@ module Parallel
 
     sig do
       params(
-        args: [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
+        args: T.any(
+          [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
+          T::Enumerable[T.anything]
+        ),
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
@@ -46,7 +55,10 @@ module Parallel
 
     sig do
       params(
-        args: [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
+        args: T.any(
+          [T::Enumerable[T.anything], T.nilable(T::Hash[Symbol, T.anything])],
+          T::Enumerable[T.anything]
+        ),
         block: T.proc.params(item: T.anything).returns(T.anything)
       ).returns(T::Array[T.anything])
     end
